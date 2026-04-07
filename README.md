@@ -85,23 +85,22 @@ python3 etl.py
 ```
 
 
-## Working with `transform.py`
+## Working with `transform.py` and `src/transforms/`
 
-The `transform.py` file is a key component of your data engineering pipeline. It's where you can apply various transformations to your data to prepare it for analysis. Here are some steps to get started with `transform.py`:
+Business transforms live in **`src/transforms/`** (one module per theme). **`src/jobs/transform.py`** chains them via `apply_all()` and writes Parquet.
 
-1. Open the `transform.py` file from `src/jobs` folder in your code editor.
+| Module | Adds (examples) |
+|--------|------------------|
+| `time_based.py` | `shipping_speed_category` from `Aging` (express ≤2d, standard ≤6d, else delayed) |
+| `customer_value.py` | `customer_total_sales`, `customer_total_profit`, `customer_value_segment` (tertiles) |
+| `cumulative_discount.py` | `order_ts`, `cumulative_discount` (per customer, time-ordered) |
+| `dynamic_shipping.py` | `dynamic_shipping_cost`, `profit_after_dynamic_shipping` |
 
-2. Review the existing code and understand the data transformations that are already implemented.
+Run tests (requires Java for PySpark):
 
-3. Modify the `transform.py` script as needed for your specific use case. You can add, remove, or customize data transformation functions to suit your data engineering requirements.
-
-4. Optionally, you can consider using [Test-Driven Development (TDD)](https://antoprince001.medium.com/test-driven-development-in-pyspark-3b48f77bca06) principles to ensure the correctness of your data transformations. Write unit tests for your transformation functions in a separate test_transform.py file under `tests/jobs` folder and run the tests regularly.
-
-5. To execute the test suite using pytest, execute the following command
-   ```bash
-   pytest tests/jobs/test_transform.py
-   
-   ```
+```bash
+pytest tests/jobs/test_transforms.py tests/jobs/test_extract.py
+```
 
 6. Make use of Copilot's code suggestions and autocompletion features to make your data transformation tasks more efficient and productive.
 
