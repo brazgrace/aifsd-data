@@ -4,3 +4,9 @@ env/
 .DS_Store
 .pytest_cache/
 .ipynb_checkpoints/
+build/
+*.log
+coverage/
+.vscode/
+.crc
+.parquet

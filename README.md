@@ -1,6 +1,6 @@
 # Copilot Workshop - Data Engineering Starter Code
 
-Welcome to the Copilot Data Engineering Workshop! This repository provides you with a starter codebase to experiment with various data engineering tasks using Python. 
+Welcome to the Copilot Data Engineering Workshop! This repository provides you with a starter codebase to experiment with various data engineering tasks using Python.
 
 ## Prerequisites
 
@@ -8,7 +8,9 @@ Before you begin, make sure you have the following prerequisites installed on yo
 
 - Python 3 (Python 3.6 or higher is recommended)
 - `pip` (Python package manager)
-- Java ( PySpark requires Java 8 or later with JAVA_HOME properly set. )
+- **Java:** This repo pins **PySpark 3.3.4**, which works with **Java 8 or 11**. Set `JAVA_HOME` to that JDK.
+  If you use a **newer unpinned PySpark (3.5+)**, you need **Java 17+**; otherwise you may see
+  `UnsupportedClassVersionError` / class file version **61.0** vs **55.0**.
 
 
 ## Problem Statement
@@ -73,16 +75,30 @@ Follow these steps to set up your environment and run the provided data engineer
    pip install -r requirements.txt
    ```
 
-   
+
 ## Running the ETL Script
 
 Now that you have set up your environment, you can run the ETL (Extract, Transform, Load) script to experiment with data engineering tasks.
 
-To run the ETL script, execute the following command:
+Run the ETL from the **`ecom-etl-data`** folder using the **venv** where you installed `requirements.txt` (system `python3` often has no PySpark):
 
 ```bash
-python3 etl.py
+source env/bin/activate
+pip install -r requirements.txt   # first time only
+python etl.py
 ```
+
+Or in one shot (no activate):
+
+```bash
+./env/bin/python etl.py
+```
+
+If you see `ModuleNotFoundError: No module named 'pyspark'`, you are not using that environment.
+
+On **Python 3.12**, Spark’s `toPandas()` path can fail (`distutils` removed). This project loads the staging **Parquet** folder with **pandas + pyarrow** instead ([`src/jobs/load.py`](src/jobs/load.py)).
+
+The script uses [`src/local_spark.py`](src/local_spark.py) so the driver binds to **`127.0.0.1`**, which avoids `BindException: Can't assign requested address` on some Mac/VPN/`/etc/hosts` setups.
 
 
 ## Working with `transform.py` and `src/transforms/`
@@ -107,13 +123,32 @@ pytest tests/jobs/test_transforms.py tests/jobs/test_extract.py
 
 ## Working with `analysis.ipynb`
 
-The `analysis.ipynb` file is a Jupyter Notebook where you can perform in-depth data analysis and visualization on your transformed data. Here's how to work with `analysis.ipynb`:
+Use the **same virtualenv as the ETL**. Dependencies like `matplotlib` and `scipy` are installed there.
 
-1. Open the `analysis.ipynb` notebook using VS code or any other compatible Jupyter Notebook tool. Alternatively, run the following command in local terminal.
-   ```bash
-   jupyter notebook
+### Cursor / VS Code
 
-   ```
+1. **Open the `ecom-etl-data` folder** as the workspace (or rely on [`.vscode/settings.json`](.vscode/settings.json), which points at `env/bin/python` when this folder is the workspace root).
+2. Command Palette → **Python: Select Interpreter** → choose
+   `.../ecom-etl-data/env/bin/python`
+3. In the notebook, click the **kernel** name (top right) → **Select Another Kernel…** → pick that same interpreter.
+
+### Register a named Jupyter kernel (optional)
+
+```bash
+cd ecom-etl-data
+source env/bin/activate
+pip install -r requirements.txt
+python -m ipykernel install --user --name=ecom-etl-data --display-name="Python (ecom-etl-data)"
+```
+
+Then in the notebook kernel picker, choose **Python (ecom-etl-data)**.
+
+### Classic Jupyter
+
+```bash
+source env/bin/activate
+jupyter notebook
+```
 
 3. Review the existing code to load the transformed data into the notebook.
 
