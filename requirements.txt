@@ -1,7 +1,9 @@
 numpy
 pandas
+pyarrow
 py4j
-pyspark
+# Spark 3.3.x runs on Java 8/11; unpinned pyspark 3.5+ requires Java 17 (class file 61).
+pyspark==3.3.4
 python-dateutil
 pytz
 six
@@ -9,3 +11,4 @@ tzdata
 matplotlib
 scipy
 pytest
+ipykernel
