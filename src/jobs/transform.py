@@ -1,4 +1,7 @@
+from src.transforms.pipeline import apply_all
+
+
 def transform(spark, staging_path, df):
-    # Add transformations here
-    df.write.parquet(staging_path, mode='overwrite')
+    df = apply_all(df)
+    df.write.parquet(staging_path, mode="overwrite")
     return df
