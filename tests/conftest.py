@@ -1,5 +1,4 @@
 import pytest
-
 from src.local_spark import spark_session_builder
 
 

@@ -1,12 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+.venv/
+venv/
+ENV/
 env/
-*/__pycache__/
-*/*/__pycache__/
-.DS_Store
-.pytest_cache/
+
+# Jupyter
 .ipynb_checkpoints/
-build/
-*.log
-coverage/
+*.ipynb_checkpoints
+*.ipynb
+!notebooks/*.ipynb  # Keep notebooks but not checkpoints
+
+# Secrets & Security
+.env
+.env.local
+*.key
+*.pem
+*.crt
+.secrets/
+credentials.json
+token.pickle
+
+# IDE
 .vscode/
-.crc
-.parquet
+.idea/
+*.swp
+.DS_Store
+
+# Data (sensitive or large)
+data/raw/
+data/processed/
+# Default ETL layout (see README / ECOM_ETL_* env vars)
+data_source/raw/
+data_source/staging/
+data_source/processed/
+*.db
+*.sqlite
+*.parquet
+*.csv
+!data/sample.csv
+
+# Logs & Temp
+*.log
+*.tmp
+*.cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# OS
+Thumbs.db
+.DS_Store

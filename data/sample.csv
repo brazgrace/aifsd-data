@@ -1,0 +1,4 @@
+Order_Date,Time,Aging,Customer_Id,Gender,Device_Type,Customer_Login_type,Product_Category,Product,Sales,Quantity,Discount,Profit,Shipping_Cost,Order_Priority,Payment_method
+2018-01-01,10:00:00,1,1,Female,Web,Member,Auto & Accessories,A,100,1,0.1,10,2,High,card
+2018-01-02,11:00:00,8,1,Female,Web,Member,Auto & Accessories,B,50,2,0.2,5,1,Critical,card
+2018-01-01,09:00:00,3,2,Male,Web,Guest,Books,C,20,1,0.05,2,1.5,Low,card

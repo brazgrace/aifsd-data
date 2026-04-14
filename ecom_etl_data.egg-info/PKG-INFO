@@ -1,3 +1,28 @@
+Metadata-Version: 2.4
+Name: ecom-etl-data
+Version: 0.1.0
+Summary: E-commerce Spark ETL workshop pipeline (extract, transform, load).
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: setuptools>=69
+Requires-Dist: pyarrow
+Requires-Dist: py4j
+Requires-Dist: pyspark==3.3.4
+Requires-Dist: python-dateutil
+Requires-Dist: pytz
+Requires-Dist: six
+Requires-Dist: tzdata
+Requires-Dist: matplotlib
+Requires-Dist: scipy
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+Requires-Dist: ruff>=0.8; extra == "dev"
+Requires-Dist: mypy>=1.11; extra == "dev"
+Requires-Dist: pandas-stubs; extra == "dev"
+Requires-Dist: ipykernel; extra == "dev"
+
 # Copilot Workshop - Data Engineering Starter Code
 
 Welcome to the Copilot Data Engineering Workshop! This repository provides you with a starter codebase to experiment with various data engineering tasks using Python.

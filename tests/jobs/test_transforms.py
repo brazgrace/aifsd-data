@@ -1,23 +1,7 @@
 from src.transforms.pipeline import apply_all
 
-COLS = [
-    "Order_Date",
-    "Time",
-    "Aging",
-    "Customer_Id",
-    "Gender",
-    "Device_Type",
-    "Customer_Login_type",
-    "Product_Category",
-    "Product",
-    "Sales",
-    "Quantity",
-    "Discount",
-    "Profit",
-    "Shipping_Cost",
-    "Order_Priority",
-    "Payment_method",
-]
+from tests.schema_constants import ECOMMERCE_COLUMNS
+from tests.spark_helpers import create_dataframe
 
 
 def _sample_rows():
@@ -79,8 +63,8 @@ def _sample_rows():
     ]
 
 
-def test_apply_all_adds_columns_and_logic(spark_session):
-    df = spark_session.createDataFrame(_sample_rows(), COLS)
+def test_apply_all_adds_columns_and_logic(spark_session, tmp_path):
+    df = create_dataframe(spark_session, _sample_rows(), ECOMMERCE_COLUMNS, tmp_path)
     out = apply_all(df)
 
     names = set(out.columns)
