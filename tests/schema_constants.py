@@ -1,4 +1,8 @@
-"""Shared ecommerce CSV / DataFrame schema for tests."""
+"""Shared ecommerce CSV / DataFrame schema for tests.
+
+``SAMPLE_CSV_PATH`` points at the committed tiny dataset under ``data/``; the full
+pipeline default input is ``data/raw/ecommerce_data.csv`` (see ``src/etl_config.py``).
+"""
 
 ECOMMERCE_COLUMNS = [
     "Order_Date",

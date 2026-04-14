@@ -1,5 +1,6 @@
 # Python
 __pycache__/
+*.egg-info/
 *.py[cod]
 *.so
 .Python
@@ -30,13 +31,10 @@ token.pickle
 *.swp
 .DS_Store
 
-# Data (sensitive or large)
+# Data (sensitive or large); keep data/sample.csv versioned (see exception below)
 data/raw/
+data/staging/
 data/processed/
-# Default ETL layout (see README / ECOM_ETL_* env vars)
-data_source/raw/
-data_source/staging/
-data_source/processed/
 *.db
 *.sqlite
 *.parquet

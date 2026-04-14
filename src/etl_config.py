@@ -1,4 +1,8 @@
-"""Environment-driven paths and names for the CLI ETL entrypoint."""
+"""Environment-driven paths and names for the CLI ETL entrypoint.
+
+Defaults assume a single ``data/`` tree: ``data/raw`` (input CSV), ``data/staging``
+(Parquet), ``data/processed`` (SQLite). Override with ``ECOM_ETL_*`` env vars.
+"""
 
 from __future__ import annotations
 
@@ -25,8 +29,8 @@ def load_etl_config() -> EtlConfig:
     """Load settings from ``ECOM_ETL_*`` variables with repo-relative defaults."""
     return EtlConfig(
         app_name=_env("APP_NAME", "ECommerce ETL Pipeline"),
-        input_path=_env("INPUT_PATH", "data_source/raw/ecommerce_data.csv"),
-        staging_path=_env("STAGING_PATH", "data_source/staging/ecommerce"),
-        db_path=_env("DB_PATH", "data_source/processed/ecommerce.db"),
+        input_path=_env("INPUT_PATH", "data/raw/ecommerce_data.csv"),
+        staging_path=_env("STAGING_PATH", "data/staging/ecommerce"),
+        db_path=_env("DB_PATH", "data/processed/ecommerce.db"),
         table_name=_env("TABLE_NAME", "ecommerce"),
     )

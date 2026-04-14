@@ -15,8 +15,8 @@ A small **PySpark** ETL pipeline: CSV extract → Parquet staging (transforms in
 | `src/jobs/` | `extract`, `transform`, `load`. |
 | `src/transforms/` | Business logic chained in `pipeline.apply_all`. |
 | `src/local_spark.py` | `SparkSession` with driver bound to `127.0.0.1`. |
-| `data/sample.csv` | Tiny committed dataset for tests (not the full Kaggle file). |
-| `data_source/` | Default local I/O root for the full ETL run (typically gitignored under `raw/`, `staging/`, `processed/`). |
+| `data/sample.csv` | Tiny committed dataset for tests. |
+| `data/raw/`, `data/staging/`, `data/processed/` | Default ETL I/O (raw CSV, Parquet staging, SQLite); dirs are gitignored except the sample file under `data/`. |
 
 ## Environment variables
 
@@ -25,9 +25,9 @@ All optional; defaults match the previous hard-coded paths.
 | Variable | Default |
 |----------|---------|
 | `ECOM_ETL_APP_NAME` | `ECommerce ETL Pipeline` |
-| `ECOM_ETL_INPUT_PATH` | `data_source/raw/ecommerce_data.csv` |
-| `ECOM_ETL_STAGING_PATH` | `data_source/staging/ecommerce` |
-| `ECOM_ETL_DB_PATH` | `data_source/processed/ecommerce.db` |
+| `ECOM_ETL_INPUT_PATH` | `data/raw/ecommerce_data.csv` |
+| `ECOM_ETL_STAGING_PATH` | `data/staging/ecommerce` |
+| `ECOM_ETL_DB_PATH` | `data/processed/ecommerce.db` |
 | `ECOM_ETL_TABLE_NAME` | `ecommerce` |
 
 Example:
@@ -69,4 +69,4 @@ mypy
 
 ## Do not commit
 
-Virtualenv (`env/`), `.env` secrets, large or raw datasets, Parquet/SQLite outputs, and default `data_source/{raw,staging,processed}/` contents (see `.gitignore`).
+Virtualenv (`env/`), `.env` secrets, large or raw datasets, Parquet/SQLite outputs, and default `data/{raw,staging,processed}/` contents (see `.gitignore`).

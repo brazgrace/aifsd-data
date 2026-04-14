@@ -82,16 +82,18 @@ Follow these steps to set up your environment and run the provided data engineer
    ```
 
 
-## Data layout: `data/` vs `data_source/`
+## Data layout
 
-| Location | Purpose |
-|----------|---------|
-| **`data/sample.csv`** | Small committed CSV used by **tests** and quick experiments (safe to version). |
-| **`data_source/raw/`** | Place the full Kaggle **`ecommerce_data.csv`** here for real runs (ignored by git). |
-| **`data_source/staging/`** | Parquet output from the transform step (ignored by git). |
-| **`data_source/processed/`** | SQLite DB output from the load step (ignored by git). |
+All local inputs and outputs live under **`data/`** (see `.gitignore` for what stays out of git).
 
-Defaults match these paths; override with environment variables when needed (see below).
+| Path | Purpose |
+|------|---------|
+| **`data/sample.csv`** | Small committed CSV for **tests** and quick tries. |
+| **`data/raw/ecommerce_data.csv`** | Full Kaggle export for real runs (create this path locally; ignored by git). |
+| **`data/staging/ecommerce`** | Parquet from the transform step (ignored by git). |
+| **`data/processed/ecommerce.db`** | SQLite from the load step (ignored by git). |
+
+Defaults match these paths; override with **`ECOM_ETL_*`** environment variables when needed (see below).
 
 
 ## Running the ETL Script
@@ -119,9 +121,9 @@ Paths and the SQLite table name are read from optional **`ECOM_ETL_*`** variable
 
 | Variable | Default |
 |----------|---------|
-| `ECOM_ETL_INPUT_PATH` | `data_source/raw/ecommerce_data.csv` |
-| `ECOM_ETL_STAGING_PATH` | `data_source/staging/ecommerce` |
-| `ECOM_ETL_DB_PATH` | `data_source/processed/ecommerce.db` |
+| `ECOM_ETL_INPUT_PATH` | `data/raw/ecommerce_data.csv` |
+| `ECOM_ETL_STAGING_PATH` | `data/staging/ecommerce` |
+| `ECOM_ETL_DB_PATH` | `data/processed/ecommerce.db` |
 | `ECOM_ETL_TABLE_NAME` | `ecommerce` |
 | `ECOM_ETL_APP_NAME` | `ECommerce ETL Pipeline` |
 
